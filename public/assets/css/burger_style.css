@@ -402,6 +402,10 @@ body {
     top: 14px;
 }
 
+#u228-E {
+    max-width: 140px;
+}
+
 #u266{
     z-index: 37;
     border-width: 0px;

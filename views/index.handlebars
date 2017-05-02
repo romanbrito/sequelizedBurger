@@ -22,35 +22,36 @@
 
     <div class="verticalspacer" data-offset-top="380" data-content-above-spacer="380"
          data-content-below-spacer="120">
-    <!--all !devoured burgers-->
-    <div id="u228">
-    <ul>
-        {{#each burgers}}
-            {{#unless this.devoured}}
-                <li>
-                    {{this.id}}.
-                    {{this.burger_name}}
-                    <form action="/{{this.id}}?_method=PUT" method="POST">
-                        <input type="hidden" name="devoured" value="true">
-                        <button class="button submit-btn" type="submit">Devour it!</button>
-                    </form>
-                </li>
-            {{/unless}}
-        {{/each}}
-    </ul>
-    </div>
-    <div id="u266">
-        <ul>
-            {{#each burgers}}
-            {{#if this.devoured}}
-                <li>
-                    {{this.id}}.
-                    {{this.burger_name}}
-                </li>
-            {{/if}}
-            {{/each}}
-        </ul>
+        <!--all !devoured burgers-->
+        <div id="u228">
+            <ul>
+                {{#each burgers}}
+                    {{#unless this.devoured}}
+                        <li>
+                            {{this.id}}.
+                            {{this.burger_name}}
+                            <form action="/{{this.id}}?_method=PUT" method="POST">
+                                <input type="hidden" name="devoured" value="true">
+                                <input type="text" id="u228-E" name="customer_name" placeholder="Customer" value="">
+                                <button class="button submit-btn" type="submit">Devour it!</button>
+                            </form>
+                        </li>
+                    {{/unless}}
+                {{/each}}
+            </ul>
+        </div>
+        <div id="u266">
+            <ul>
+                {{#each burgers}}
+                    {{#if this.devoured}}
+                        <li>
+                            {{this.id}}.
+                            {{this.burger_name}}
+                        </li>
+                    {{/if}}
+                {{/each}}
+            </ul>
 
-    </div>
+        </div>
     </div>
 </div>
