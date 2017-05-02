@@ -25,7 +25,11 @@ app.set('view engine', 'handlebars');
 // require Routes with app.use
 app.use(require('./controllers/burgers_controller.js'));
 
- db.sequelize.sync().then(function () {
+// Syncing our sequelize models and then starting our express app
+// force: true to allow structure modifications in our database,
+// this is the case with associations
+
+ db.sequelize.sync({ force: true }).then(function () {
      var server = app.listen(app.get('port'), function () {
          console.log('Listening on port ' + app.get('port'));
      });

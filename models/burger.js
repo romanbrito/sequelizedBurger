@@ -8,6 +8,17 @@ module.exports = function (sequelize, Datatypes) {
             defaultValue: false
         }
         // Sequelize automatically adds createdAt and updatedAt
-    });
+    },
+        {
+            classMethods: {
+                associate: function (models) {
+                    Burger.belongsTo(models.Customer, {
+                        foreignKey: {
+                            allowNull: true
+                        }
+                    });
+                }
+            }
+        });
     return Burger;
 };
