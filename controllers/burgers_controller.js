@@ -31,7 +31,8 @@ router.post("/", function (req, res) {
     //     res.redirect("/");
     // });
     db.Burger.create({
-        burger_name: req.body.burger_name
+        burger_name: req.body.burger_name,
+        customer_name: "roman"
     }).then(function (dbBurger) {
         res.redirect("/");
     });
@@ -45,16 +46,62 @@ router.put("/:id", function (req, res) {
     //     res.redirect("/");
     // });
     console.log(req.body);
+    var customerName = req.body.customer_name;
+    var customerId = null;
 
-    db.Burger.update({
-        devoured: req.body.devoured
-    }, {
-        where: {
-            id: req.params.id
-        }
-    }).then(function (dbBurger) {
-        res.redirect("/");
-    });
+    if (customerName) {
+
+        console.log(customerName);
+
+        // find out if name already exists
+
+        db.Customer.findOne({
+            where: {
+                customer_name: customerName
+            }
+        }).then(function (dbCustomer) {
+            // if customer already exists associate with burger
+            if (dbCustomer) {
+                customerId = dbCustomer.id;
+                db.Burger.update({
+                    devoured: req.body.devoured,
+                    CustomerId: customerId
+                }, {
+                    where: {
+                        id: req.params.id
+                    }
+                }).then(function (dbBurger) {
+                    res.redirect("/");
+                });
+                // if not create one and associate
+            } else {
+                db.Customer.create({
+                    customer_name: customerName
+                }).then(function (dbCustomer) {
+                    db.Burger.update({
+                        devoured: req.body.devoured,
+                        CustomerId: dbCustomer.id
+                    }, {
+                        where: {
+                            id: req.params.id
+                        }
+                    }).then(function (dbBurger) {
+                        res.redirect("/");
+                    });
+                });
+            }
+        });
+    } else {
+        db.Burger.update({
+            devoured: req.body.devoured
+        }, {
+            where: {
+                id: req.params.id
+            }
+        }).then(function (dbBurger) {
+            res.redirect("/");
+        });
+    }
 });
 
 module.exports = router;
