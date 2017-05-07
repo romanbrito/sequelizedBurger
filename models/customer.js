@@ -1,8 +1,7 @@
 module.exports = function (sequelize, Datatypes) {
     var Customer = sequelize.define("Customer", {
         customer_name: {
-            type: Datatypes.STRING,
-            allowNull: true
+            type: Datatypes.STRING
         }
     }, {
         classMethods: {

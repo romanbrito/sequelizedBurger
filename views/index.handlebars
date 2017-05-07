@@ -46,8 +46,10 @@
                     {{#if this.devoured}}
                         <li>
                             {{this.id}}.
-                            {{this.Customer.customer_name}}
-                            Devoured the
+                            {{#if this.Customer.customer_name}}
+                                {{this.Customer.customer_name}}
+                                Devoured the
+                            {{/if}}
                             {{this.burger_name}}
                         </li>
                     {{/if}}

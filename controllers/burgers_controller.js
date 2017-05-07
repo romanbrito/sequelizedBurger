@@ -26,16 +26,11 @@ router.post("/", function (req, res) {
 });
 
 router.put("/:id", function (req, res) {
-    console.log(req.body);
     var customerName = req.body.customer_name;
-    var customerId = null;
 
     if (customerName) {
 
-        console.log(customerName);
-
         // find out if name already exists
-
         db.Customer.findOne({
             where: {
                 customer_name: customerName
